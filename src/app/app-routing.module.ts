@@ -1,11 +1,32 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
+import { MainQuizComponent } from "./main-quiz/main-quiz.component";
+import { QuizDetailComponent } from "./quiz-detail/quiz-detail.component";
+import { LoginComponent } from "./login/login.component";
+import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 
-
-const routes: Routes = [];
+const routes: Routes = [
+  { path: "", redirectTo: "main-quiz", pathMatch: "full" },
+  {
+    path: "main-quiz",
+    component: MainQuizComponent,
+  },
+  {
+    path: "quiz-detail",
+    component: QuizDetailComponent,
+  },
+  {
+    path: "login",
+    component: LoginComponent,
+  },
+  {
+    path: "**",
+    component: PageNotFoundComponent,
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
