@@ -1,6 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { LoginComponent } from "./login/login.component";
@@ -12,6 +11,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
 import { ReactiveFormsModule } from "@angular/forms";
+import { LoginService } from "./login/login.service";
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     MatCardModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

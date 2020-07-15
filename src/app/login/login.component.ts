@@ -1,5 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormControl } from "@angular/forms";
+import {
+  FormGroup,
+  FormControl,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+} from "@angular/forms";
 
 @Component({
   selector: "login",
@@ -7,16 +13,36 @@ import { FormGroup, FormControl } from "@angular/forms";
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup = new FormGroup({
-    username: new FormControl(""),
-    password: new FormControl(""),
-  });
+  loginForm: FormGroup;
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {
+    this.loginForm = fb.group({
+      username: ["", [Validators.required]],
+      password: ["", Validators.required],
+    });
+  }
 
-  ngOnInit(): void {}
+  get username(): AbstractControl {
+    return this.loginForm.controls["username"];
+  }
+
+  get password(): AbstractControl {
+    return this.loginForm.controls["password"];
+  }
+
+  ngOnInit() {}
+
+  private model() {
+    return {
+      username: this.username.value,
+      password: this.password.value,
+    };
+  }
 
   submit() {
-    //call login api endpoint
+    if (this.username.valid && this.password.valid) {
+      let model = this.model();
+    }
+    //call login api endpoint with model and check username and password exist in database
   }
 }

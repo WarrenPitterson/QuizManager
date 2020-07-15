@@ -12,16 +12,23 @@
               formControlName="username"
             />
           </mat-form-field>
+          <mat-error *ngIf="username.touched && username.errors?.required">
+            Username Required
+          </mat-error>
         </p>
 
         <p>
           <mat-form-field>
             <input
+              matInput
               type="password"
               placeholder="Password"
               formControlName="password"
             />
           </mat-form-field>
+          <mat-error *ngIf="password.touched && password.errors?.required">
+            Password Required
+          </mat-error>
         </p>
         <button mat-raised-button (click)="submit()" color="primary">
           Login
