@@ -11,6 +11,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MatCardModule } from "@angular/material/card";
     MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
