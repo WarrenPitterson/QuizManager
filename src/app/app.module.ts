@@ -10,8 +10,12 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatCardModule } from "@angular/material/card";
+import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
 import { LoginService } from "./login/login.service";
+import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 @NgModule({
   declarations: [
@@ -29,8 +33,12 @@ import { LoginService } from "./login/login.service";
     MatFormFieldModule,
     MatCardModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
   ],
-  providers: [LoginService],
+  providers: [LoginService, HttpClientModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
