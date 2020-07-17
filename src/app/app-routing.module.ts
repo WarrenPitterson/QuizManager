@@ -6,13 +6,12 @@ import { LoginComponent } from "./login/login.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 
 const routes: Routes = [
-  // { path: "", redirectTo: "main-quiz", pathMatch: "full" },
   {
     path: "main-quiz",
     component: MainQuizComponent,
   },
   {
-    path: "quiz-detail",
+    path: "quiz-detail/:id",
     component: QuizDetailComponent,
   },
   {
