@@ -29,6 +29,9 @@
               Password Required
             </mat-error>
           </mat-form-field>
+          <mat-error *ngIf="invalidUser">
+            Username or password is incorrect
+          </mat-error>
         </p>
         <button mat-raised-button (click)="submit()" color="primary">
           Login

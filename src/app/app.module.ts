@@ -1,3 +1,4 @@
+import { QuizDetailService } from "./quiz-detail/quiz-detail.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
@@ -16,6 +17,8 @@ import { LoginService } from "./login/login.service";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatDialogModule } from "@angular/material/dialog";
+import { EditQuestionComponent } from "./edit-question/edit-question.component";
 
 @NgModule({
   declarations: [
@@ -25,6 +28,7 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MainQuizComponent,
     QuizDetailComponent,
     PageNotFoundComponent,
+    EditQuestionComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,8 +41,10 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatInputModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    MatDialogModule,
   ],
-  providers: [LoginService, HttpClientModule],
+  providers: [LoginService, QuizDetailService, HttpClientModule],
+  entryComponents: [EditQuestionComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

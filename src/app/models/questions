@@ -1,6 +1,0 @@
-export class Questions {
-  public id: number;
-  public question: string;
-  public answers: string[];
-  public CorrectAnswer: number;
-}

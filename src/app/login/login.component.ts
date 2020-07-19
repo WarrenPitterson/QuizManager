@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from "@angular/core";
+import { Component, OnInit, DoCheck } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -13,9 +13,9 @@ import { User } from "../models/user";
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
 })
-export class LoginComponent implements OnInit, OnChanges {
+export class LoginComponent implements DoCheck {
   loginForm: FormGroup;
-  isAuthenticated = false;
+  invalidUser: boolean;
   user: User[] = [];
 
   constructor(private fb: FormBuilder, private service: LoginService) {
@@ -33,19 +33,8 @@ export class LoginComponent implements OnInit, OnChanges {
     return this.loginForm.controls["password"];
   }
 
-  ngOnInit() {
-    this.service.getAllUsers().subscribe(
-      (response) => (this.user = response)
-      //(res) => console.log("HTTP response", res),
-      //(err) => console.log("HTTP Error", err),
-      // () => console.log("HTTP request completed.")
-    );
-  }
-
-  ngOnChanges() {
-    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
-    //Add '${implements OnChanges}' to the class.
-    console.log(this.isAuthenticated);
+  ngDoCheck() {
+    this.invalidUser = this.service.invalidUserError;
   }
 
   private model() {
@@ -56,32 +45,9 @@ export class LoginComponent implements OnInit, OnChanges {
   }
 
   submit() {
-    debugger;
     if (this.userName.valid && this.password.valid) {
       let model = this.model();
-
-      this.user.forEach((user) => {
-        if (
-          model.password == user.password &&
-          model.userName == user.userName
-        ) {
-          this.isAuthenticated = true;
-        }
-      });
-
-      // if (
-      //   model.username == this.user[0].username &&
-      //   model.password == this.user[0].password
-      // ) {
-      //   this.isAuthenticated = true;
-      // }
-
-      //possibly just check the model exists on the database
+      this.service.login(model.userName, model.password);
     }
-
-    // if (this.isAuthenticated) {
-    //   //load main page
-    // }
-    //call login api endpoint with model and check username and password exist in database
   }
 }

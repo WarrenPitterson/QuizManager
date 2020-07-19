@@ -1,21 +1,21 @@
 <div class="container">
   <div>
-    <p>Question Here</p>
+    <p>{{ this.quiz.question }}</p>
   </div>
   <div>
-    Option 1
-    <button mat-raised-button>Pick me!</button>
+    {{ this.quiz.correctAnswer }}
+    <button mat-raised-button (click)="openDialog()">Edit</button>
   </div>
   <div>
-    Option 2
-    <button mat-raised-button>Pick me!</button>
+    {{ this.quiz.inCorrectAnswer1 }}
+    <button mat-raised-button (click)="edit()">Edit</button>
   </div>
   <div>
-    Option 3
-    <button mat-raised-button>Pick me!</button>
+    {{ this.quiz.inCorrectAnswer2 }}
+    <button mat-raised-button>Edit</button>
   </div>
   <div>
-    Option 4
-    <button mat-raised-button>Pick me!</button>
+    {{ this.quiz.inCorrectAnswer3 }}
+    <button mat-raised-button>Edit</button>
   </div>
 </div>
