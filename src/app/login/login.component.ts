@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from "@angular/core";
+import { Component, DoCheck } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -6,7 +6,6 @@ import {
   AbstractControl,
 } from "@angular/forms";
 import { LoginService } from "./login.service";
-import { User } from "../models/user";
 
 @Component({
   selector: "login",
@@ -16,7 +15,6 @@ import { User } from "../models/user";
 export class LoginComponent implements DoCheck {
   loginForm: FormGroup;
   invalidUser: boolean;
-  // user: User[] = [];
 
   constructor(private fb: FormBuilder, private service: LoginService) {
     this.loginForm = fb.group({

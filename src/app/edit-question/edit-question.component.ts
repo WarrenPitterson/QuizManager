@@ -22,11 +22,11 @@ export class EditQuestionComponent implements OnInit {
     private dialog: MatDialogRef<EditQuestionComponent>
   ) {
     this.editForm = fb.group({
-      question: [""],
-      correctAnswer: [""],
-      incorrectAnswer1: [""],
-      incorrectAnswer2: [""],
-      incorrectAnswer3: [""],
+      question: ["", Validators.required],
+      correctAnswer: ["", Validators.required],
+      incorrectAnswer1: ["", Validators.required],
+      incorrectAnswer2: ["", Validators.required],
+      incorrectAnswer3: ["", Validators.required],
     });
   }
 
@@ -63,9 +63,8 @@ export class EditQuestionComponent implements OnInit {
     if (this.editForm.valid) {
       let model = this.model();
       this.service.edit(model, this.service.quizId);
-      // this.service.getQuizDetails();
+      this.dialog.close();
     }
-    this.dialog.close();
   }
 
   close() {

@@ -3,7 +3,7 @@ import { EditQuestionComponent } from "../edit-question/edit-question.component"
 import { Questions } from "./../models/questions";
 import { QuizService } from "./quiz.service";
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { LoginService } from "../login/login.service";
 
