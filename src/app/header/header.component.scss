@@ -1,5 +1,5 @@
 .header-container {
-  height: 3vh;
+  height: 7vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,4 +9,10 @@
 p {
   color: white;
   font-weight: bold;
+}
+
+img {
+  height: 7vh;
+  width: 11vh;
+  margin-left: 50px;
 }

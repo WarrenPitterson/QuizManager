@@ -1,20 +1,30 @@
 <div class="quiz-container">
-  <div>
-    <p>{{ this.quiz.question }}</p>
+  <label class="title">Question</label>
+  <p>{{ this.quiz.question }}</p>
+  <div *ngIf="fullPermission || partialPermission">
+    <label class="title">Option 1</label>
+    <p>
+      {{ this.quiz.correctAnswer }}
+    </p>
+    <label class="title">Option 2</label>
+    <p>
+      {{ this.quiz.incorrectAnswer1 }}
+    </p>
+    <label class="title">Option 3</label>
+    <p>
+      {{ this.quiz.incorrectAnswer2 }}
+    </p>
+    <label class="title">Option 4</label>
+    <p>
+      {{ this.quiz.incorrectAnswer3 }}
+    </p>
+    <button
+      *ngIf="fullPermission"
+      mat-raised-button
+      (click)="edit()"
+      color="primary"
+    >
+      Edit
+    </button>
   </div>
-  <!-- <div *ngIf="fullPermission || partialPermission"> -->
-  <div>
-    {{ this.quiz.correctAnswer }}
-  </div>
-  <div>
-    {{ this.quiz.incorrectAnswer1 }}
-  </div>
-  <div>
-    {{ this.quiz.incorrectAnswer2 }}
-  </div>
-  <div>
-    {{ this.quiz.incorrectAnswer3 }}
-  </div>
-  <button mat-raised-button (click)="edit()">Edit</button>
-  <!-- </div> -->
 </div>
