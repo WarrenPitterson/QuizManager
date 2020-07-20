@@ -2,20 +2,19 @@
   <div>
     <p>{{ this.quiz.question }}</p>
   </div>
+  <!-- <div *ngIf="fullPermission || partialPermission"> -->
   <div>
     {{ this.quiz.correctAnswer }}
-    <button mat-raised-button (click)="openDialog()">Edit</button>
   </div>
   <div>
-    {{ this.quiz.inCorrectAnswer1 }}
-    <button mat-raised-button (click)="edit()">Edit</button>
+    {{ this.quiz.incorrectAnswer1 }}
   </div>
   <div>
-    {{ this.quiz.inCorrectAnswer2 }}
-    <button mat-raised-button>Edit</button>
+    {{ this.quiz.incorrectAnswer2 }}
   </div>
   <div>
-    {{ this.quiz.inCorrectAnswer3 }}
-    <button mat-raised-button>Edit</button>
+    {{ this.quiz.incorrectAnswer3 }}
   </div>
+  <button mat-raised-button (click)="edit()">Edit</button>
+  <!-- </div> -->
 </div>

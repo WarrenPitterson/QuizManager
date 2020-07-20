@@ -1,4 +1,4 @@
-import { QuizDetailService } from "./quiz-detail/quiz-detail.service";
+import { QuizService } from "./quiz-detail/quiz.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
@@ -43,7 +43,7 @@ import { EditQuestionComponent } from "./edit-question/edit-question.component";
     FlexLayoutModule,
     MatDialogModule,
   ],
-  providers: [LoginService, QuizDetailService, HttpClientModule],
+  providers: [LoginService, QuizService, HttpClientModule],
   entryComponents: [EditQuestionComponent],
   bootstrap: [AppComponent],
 })

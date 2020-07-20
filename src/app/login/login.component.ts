@@ -16,7 +16,7 @@ import { User } from "../models/user";
 export class LoginComponent implements DoCheck {
   loginForm: FormGroup;
   invalidUser: boolean;
-  user: User[] = [];
+  // user: User[] = [];
 
   constructor(private fb: FormBuilder, private service: LoginService) {
     this.loginForm = fb.group({
@@ -45,7 +45,7 @@ export class LoginComponent implements DoCheck {
   }
 
   submit() {
-    if (this.userName.valid && this.password.valid) {
+    if (this.loginForm.valid) {
       let model = this.model();
       this.service.login(model.userName, model.password);
     }

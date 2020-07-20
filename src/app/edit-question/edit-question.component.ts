@@ -1,12 +1,12 @@
-import { Questions } from "../models/questions";
+import { MatDialogRef } from "@angular/material/dialog";
+import { Component, OnInit } from "@angular/core";
 import {
-  MatDialog,
-  MatDialogConfig,
-  MAT_DIALOG_DATA,
-  MatDialogRef,
-} from "@angular/material/dialog";
-import { Component, OnInit, Inject } from "@angular/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+  FormGroup,
+  FormBuilder,
+  Validators,
+  AbstractControl,
+} from "@angular/forms";
+import { QuizService } from "../quiz-detail/quiz.service";
 
 @Component({
   selector: "edit-question",
@@ -15,26 +15,57 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 })
 export class EditQuestionComponent implements OnInit {
   editForm: FormGroup;
-  QuestionEdit: string;
 
   constructor(
-    private dialog: MatDialogRef<EditQuestionComponent>,
-    private matdialog: MatDialog,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) data
-  ) {}
+    private service: QuizService,
+    private dialog: MatDialogRef<EditQuestionComponent>
+  ) {
+    this.editForm = fb.group({
+      question: [""],
+      correctAnswer: [""],
+      incorrectAnswer1: [""],
+      incorrectAnswer2: [""],
+      incorrectAnswer3: [""],
+    });
+  }
+
+  get question(): AbstractControl {
+    return this.editForm.controls["question"];
+  }
+  get correctAnswer(): AbstractControl {
+    return this.editForm.controls["correctAnswer"];
+  }
+  get incorrectAnswer1(): AbstractControl {
+    return this.editForm.controls["incorrectAnswer1"];
+  }
+  get incorrectAnswer2(): AbstractControl {
+    return this.editForm.controls["incorrectAnswer2"];
+  }
+  get incorrectAnswer3(): AbstractControl {
+    return this.editForm.controls["incorrectAnswer3"];
+  }
 
   ngOnInit() {}
 
-  openDialog() {
-    const dialogConfig = new MatDialogConfig();
+  private model() {
+    return {
+      question: this.question.value,
+      correctAnswer: this.correctAnswer.value,
+      incorrectAnswer1: this.incorrectAnswer1.value,
+      incorrectAnswer2: this.incorrectAnswer2.value,
+      incorrectAnswer3: this.incorrectAnswer3.value,
+      questionId: this.service.quizId,
+    };
+  }
 
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    dialogConfig.data = "test";
-
-    let dialogRef = this.matdialog.open(EditQuestionComponent, dialogConfig);
+  save() {
+    if (this.editForm.valid) {
+      let model = this.model();
+      this.service.edit(model, this.service.quizId);
+      // this.service.getQuizDetails();
+    }
+    this.dialog.close();
   }
 
   close() {

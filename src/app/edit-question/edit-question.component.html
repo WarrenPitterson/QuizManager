@@ -1,12 +1,74 @@
-<h2 mat-dialog-title>Edit</h2>
+<h2 mat-dialog-title>Edit Q&A</h2>
 
-<mat-dialog-content [formGroup]="editForm">
-  <mat-form-field>
-    <input matInput placeholder="New Question" formControlName="QuestionEdit" />
-  </mat-form-field>
+<mat-dialog-content [formGroup]="editForm" class="inputs">
+  <div>
+    <mat-form-field>
+      <input matInput placeholder="Question" formControlName="question" />
+    </mat-form-field>
+    <mat-error *ngIf="question.touched && question.errors?.required">
+      Value Required
+    </mat-error>
+  </div>
+  <div>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Correct Answer"
+        formControlName="correctAnswer"
+      />
+    </mat-form-field>
+    <mat-error *ngIf="correctAnswer.touched && correctAnswer.errors?.required">
+      Value Required
+    </mat-error>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Incorrect Answer 1"
+        formControlName="incorrectAnswer1"
+      />
+    </mat-form-field>
+    <mat-error
+      *ngIf="incorrectAnswer1.touched && incorrectAnswer1.errors?.required"
+    >
+      Value Required
+    </mat-error>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Incorrect Answer 2"
+        formControlName="incorrectAnswer2"
+      />
+    </mat-form-field>
+    <mat-error
+      *ngIf="incorrectAnswer2.touched && incorrectAnswer2.errors?.required"
+    >
+      Value Required
+    </mat-error>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Incorrect Answer 3"
+        formControlName="incorrectAnswer3"
+      />
+    </mat-form-field>
+    <mat-error
+      *ngIf="incorrectAnswer3.touched && incorrectAnswer3.errors?.required"
+    >
+      Value Required
+    </mat-error>
+  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions>
+  <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
   <button class="mat-raised-button" (click)="close()">Close</button>
-  <button class="mat-raised-button mat-primary">Save</button>
 </mat-dialog-actions>

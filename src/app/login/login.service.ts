@@ -1,3 +1,4 @@
+import { Questions } from "./../models/questions";
 import { Injectable, EventEmitter, Output } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
@@ -13,13 +14,13 @@ export class LoginService {
   constructor(private http: HttpClient, private route: Router) {
     this.http = http;
   }
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.endpoint);
-  }
+  // getAllUsers(): Observable<User[]> {
+  //   return this.http.get<User[]>(this.endpoint);
+  // }
 
   login(userName: string, password: string) {
     return this.http
-      .post<any>(this.endpoint + "login", {
+      .post<User>(this.endpoint + "login", {
         userName,
         password,
       })

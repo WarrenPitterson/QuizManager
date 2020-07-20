@@ -1,9 +1,11 @@
+import { PermissionLevel } from "./../shared/permissionLevel";
 import { EditQuestionComponent } from "../edit-question/edit-question.component";
 import { Questions } from "./../models/questions";
-import { QuizDetailService } from "./quiz-detail.service";
+import { QuizService } from "./quiz.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
+import { LoginService } from "../login/login.service";
 
 @Component({
   selector: "quiz-detail",
@@ -12,25 +14,32 @@ import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 })
 export class QuizDetailComponent implements OnInit {
   quizId: number;
-  quiz: Questions[] = [];
+  quiz: Questions;
 
   constructor(
     private route: ActivatedRoute,
-    private service: QuizDetailService,
+    private service: QuizService,
+    private loginService: LoginService,
     private dialog: MatDialog
   ) {
     this.quizId = this.route.snapshot.params.id;
+    this.service.quizId = this.quizId;
+  }
+
+  get fullPermission() {
+    return this.loginService.permission == PermissionLevel.full;
+  }
+  get partialPermission() {
+    return this.loginService.permission == PermissionLevel.partial;
+  }
+  get minimumPermission() {
+    return this.loginService.permission == PermissionLevel.minimum;
   }
 
   ngOnInit() {
     this.service
-      .getQuizDetails(this.quizId)
+      .getQuizDetails()
       .subscribe((response) => (this.quiz = response));
-  }
-
-  openDialog() {
-    const dialogConfig = new MatDialogConfig();
-    this.dialog.open(EditQuestionComponent, dialogConfig);
   }
 
   edit() {
