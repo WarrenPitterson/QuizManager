@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.mat-input-wrapper {
+  width: 400px !important;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: pink;
+}

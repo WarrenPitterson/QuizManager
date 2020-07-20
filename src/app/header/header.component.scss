@@ -1,4 +1,12 @@
-.container {
-  max-height: 200px;
-  background-color: red;
+.header-container {
+  height: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #673ab7;
+}
+
+p {
+  color: white;
+  font-weight: bold;
 }

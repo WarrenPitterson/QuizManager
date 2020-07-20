@@ -1,1 +1,20 @@
-<p>quiz-detail works!</p>
+<div class="quiz-container">
+  <div>
+    <p>{{ this.quiz.question }}</p>
+  </div>
+  <!-- <div *ngIf="fullPermission || partialPermission"> -->
+  <div>
+    {{ this.quiz.correctAnswer }}
+  </div>
+  <div>
+    {{ this.quiz.incorrectAnswer1 }}
+  </div>
+  <div>
+    {{ this.quiz.incorrectAnswer2 }}
+  </div>
+  <div>
+    {{ this.quiz.incorrectAnswer3 }}
+  </div>
+  <button mat-raised-button (click)="edit()">Edit</button>
+  <!-- </div> -->
+</div>
