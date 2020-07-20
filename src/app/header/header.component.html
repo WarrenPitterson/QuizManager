@@ -3,4 +3,9 @@
     <h2>Quiz Manager WebbiSkools</h2>
   </div>
   <img src="../../assets/logo.jpg" alt="" />
+  <div class="logout" *ngIf="loggedIn">
+    <button mat-raised-button color="primary" [routerLink]="['/logout']">
+      Logout
+    </button>
+  </div>
 </div>

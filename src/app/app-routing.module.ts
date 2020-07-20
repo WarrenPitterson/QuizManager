@@ -15,6 +15,10 @@ const routes: Routes = [
     component: QuizDetailComponent,
   },
   {
+    path: "logout",
+    component: LoginComponent,
+  },
+  {
     path: "",
     component: LoginComponent,
   },
