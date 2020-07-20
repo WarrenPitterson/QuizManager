@@ -1,5 +1,6 @@
 export class Questions {
-  public id: number;
+  public questionId: number;
+  public quizId: number;
   public question: string;
   public correctAnswer: string;
   public incorrectAnswer1: string;

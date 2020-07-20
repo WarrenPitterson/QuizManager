@@ -43,6 +43,9 @@ export class QuizDetailComponent implements OnInit {
   }
 
   edit() {
-    this.dialog.open(EditQuestionComponent);
+    this.dialog.open(EditQuestionComponent, {
+      data: this.quiz.questionId,
+      width: "30vw",
+    });
   }
 }

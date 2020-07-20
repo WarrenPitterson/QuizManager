@@ -1,5 +1,5 @@
-import { MatDialogRef } from "@angular/material/dialog";
-import { Component, OnInit } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Component, OnInit, Inject } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -15,11 +15,13 @@ import { QuizService } from "../quiz-detail/quiz.service";
 })
 export class EditQuestionComponent implements OnInit {
   editForm: FormGroup;
+  questionId: number;
 
   constructor(
     private fb: FormBuilder,
     private service: QuizService,
-    private dialog: MatDialogRef<EditQuestionComponent>
+    private dialog: MatDialogRef<EditQuestionComponent>,
+    @Inject(MAT_DIALOG_DATA) data
   ) {
     this.editForm = fb.group({
       question: ["", Validators.required],
@@ -28,6 +30,7 @@ export class EditQuestionComponent implements OnInit {
       incorrectAnswer2: ["", Validators.required],
       incorrectAnswer3: ["", Validators.required],
     });
+    this.questionId = data;
   }
 
   get question(): AbstractControl {
@@ -55,14 +58,15 @@ export class EditQuestionComponent implements OnInit {
       incorrectAnswer1: this.incorrectAnswer1.value,
       incorrectAnswer2: this.incorrectAnswer2.value,
       incorrectAnswer3: this.incorrectAnswer3.value,
-      questionId: this.service.quizId,
+      questionId: this.questionId,
+      quizId: this.service.quizId,
     };
   }
 
   save() {
     if (this.editForm.valid) {
       let model = this.model();
-      this.service.edit(model, this.service.quizId);
+      this.service.editQuestion(model, this.questionId);
       this.dialog.close();
     }
   }
