@@ -14,6 +14,7 @@ import { LoginService } from "../login/login.service";
 })
 export class QuizDetailComponent implements OnInit {
   quizId: number;
+  allQuestions: Questions[];
   quiz: Questions;
 
   constructor(
@@ -37,9 +38,11 @@ export class QuizDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.service
-      .getQuizDetails()
-      .subscribe((response) => (this.quiz = response));
+    this.loadQuizDetails();
+    this.allQuestions = this.service.quizArray;
+    // this.service
+    //   .getQuizDetails()
+    //   .subscribe((response) => (this.quiz = response));
   }
 
   edit() {
@@ -47,5 +50,9 @@ export class QuizDetailComponent implements OnInit {
       data: this.quiz.questionId,
       width: "30vw",
     });
+  }
+
+  loadQuizDetails() {
+    this.service.getQuiz(this.quizId);
   }
 }

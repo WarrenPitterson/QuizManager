@@ -1,3 +1,4 @@
+import { QuizService } from "./../quiz-detail/quiz.service";
 import { Component, OnInit } from "@angular/core";
 
 @Component({
