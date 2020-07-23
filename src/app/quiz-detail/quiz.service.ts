@@ -13,10 +13,6 @@ export class QuizService {
     this.http = http;
   }
 
-  // getQuestion() {
-  //   return this.http.get<Questions>(this.questionEndpoint + this.quizId);
-  // }
-
   editQuestion(model, questionId: number) {
     return this.http
       .put<Questions>(this.questionEndpoint + questionId, model)
@@ -28,6 +24,8 @@ export class QuizService {
   getQuiz(id) {
     return this.http
       .get<Questions[]>(this.quizEndpoint + id)
-      .subscribe((data) => (data = this.quizArray));
+      .subscribe((data) => {
+        this.quizArray = data;
+      });
   }
 }

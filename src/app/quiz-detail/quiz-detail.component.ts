@@ -2,7 +2,7 @@ import { PermissionLevel } from "./../shared/permissionLevel";
 import { EditQuestionComponent } from "../edit-question/edit-question.component";
 import { Questions } from "./../models/questions";
 import { QuizService } from "./quiz.service";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnChanges, DoCheck } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { LoginService } from "../login/login.service";
@@ -15,7 +15,6 @@ import { LoginService } from "../login/login.service";
 export class QuizDetailComponent implements OnInit {
   quizId: number;
   allQuestions: Questions[];
-  quiz: Questions;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,26 +32,22 @@ export class QuizDetailComponent implements OnInit {
   get partialPermission() {
     return this.loginService.permission == PermissionLevel.partial;
   }
-  get minimumPermission() {
-    return this.loginService.permission == PermissionLevel.minimum;
-  }
 
   ngOnInit() {
-    this.loadQuizDetails();
-    this.allQuestions = this.service.quizArray;
-    // this.service
-    //   .getQuizDetails()
-    //   .subscribe((response) => (this.quiz = response));
+    this.service.getQuiz(this.quizId);
+    this.loadQuestion();
   }
 
   edit() {
     this.dialog.open(EditQuestionComponent, {
-      data: this.quiz.questionId,
+      data: this.allQuestions[0].questionId,
       width: "30vw",
     });
   }
 
-  loadQuizDetails() {
-    this.service.getQuiz(this.quizId);
+  loadQuestion() {
+    setTimeout(() => {
+      this.allQuestions = this.service.quizArray;
+    }, 100);
   }
 }
