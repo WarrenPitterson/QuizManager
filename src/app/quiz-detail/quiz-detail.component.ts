@@ -26,11 +26,11 @@ export class QuizDetailComponent implements OnInit {
     this.service.quizId = this.quizId;
   }
 
-  get fullPermission() {
-    return this.loginService.permission == PermissionLevel.full;
+  get editPermission() {
+    return this.loginService.permission == PermissionLevel.edit;
   }
-  get partialPermission() {
-    return this.loginService.permission == PermissionLevel.partial;
+  get restrictedPermission() {
+    return this.loginService.permission == PermissionLevel.restricted;
   }
 
   ngOnInit() {

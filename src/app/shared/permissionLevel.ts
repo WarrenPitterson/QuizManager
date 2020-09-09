@@ -1,5 +1,5 @@
 export enum PermissionLevel {
-  full = 1,
-  partial = 2,
-  minimum = 3,
+  edit = 1,
+  view = 2,
+  restricted = 3,
 }

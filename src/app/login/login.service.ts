@@ -1,3 +1,4 @@
+import { PermissionLevel } from "./../shared/permissionLevel";
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { User } from "../models/user";
@@ -28,6 +29,25 @@ export class LoginService {
         () => {
           this.invalidUserError = true;
         }
+      );
+  }
+
+  registerUser(userName: string, password: string, permission: number) {
+    debugger;
+
+    return this.http
+      .post<User>(this.endpoint + "register", {
+        userName,
+        password,
+        permission,
+      })
+      .subscribe(
+        (data) => {
+          console.log(data);
+          // Add redirect to welcome or login
+          // this.route.navigate(["/main-quiz"]);
+        },
+        () => {}
       );
   }
 }

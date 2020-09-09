@@ -1,3 +1,4 @@
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { QuizService } from "./quiz-detail/quiz.service";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -19,6 +20,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatDialogModule } from "@angular/material/dialog";
 import { EditQuestionComponent } from "./edit-question/edit-question.component";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -42,8 +44,9 @@ import { EditQuestionComponent } from "./edit-question/edit-question.component";
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatDialogModule,
+    MatSelectModule,
   ],
-  providers: [LoginService, QuizService, HttpClientModule],
+  providers: [LoginService, QuizService, HttpClientModule, MatSnackBar],
   entryComponents: [EditQuestionComponent],
   bootstrap: [AppComponent],
 })

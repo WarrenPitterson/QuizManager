@@ -1,7 +1,7 @@
 <div class="quiz-container">
   <h2>Question</h2>
   <p>{{ this.allQuestions[0].question }}</p>
-  <div *ngIf="fullPermission || partialPermission">
+  <div *ngIf="editPermission || restrictedPermission">
     <label class="title">Option 1</label>
     <p>
       {{ this.allQuestions[0].correctAnswer }}
@@ -19,7 +19,7 @@
       {{ this.allQuestions[0].incorrectAnswer3 }}
     </p>
     <button
-      *ngIf="fullPermission"
+      *ngIf="editPermission"
       mat-raised-button
       (click)="edit()"
       color="primary"

@@ -1,3 +1,4 @@
+import { PermissionLevel } from "./../shared/permissionLevel";
 import { Component, DoCheck } from "@angular/core";
 import {
   FormGroup,
@@ -6,6 +7,7 @@ import {
   AbstractControl,
 } from "@angular/forms";
 import { LoginService } from "./login.service";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: "login",
@@ -15,11 +17,23 @@ import { LoginService } from "./login.service";
 export class LoginComponent implements DoCheck {
   loginForm: FormGroup;
   invalidUser: boolean;
+  //dropDown: PermissionLevel;
 
-  constructor(private fb: FormBuilder, private service: LoginService) {
+  dropDown: any[] = [
+    { name: "Edit", value: 1 },
+    { name: "View", value: 2 },
+    { name: "Restricted", value: 3 },
+  ];
+
+  constructor(
+    private fb: FormBuilder,
+    private service: LoginService,
+    private snackbar: MatSnackBar
+  ) {
     this.loginForm = fb.group({
       userName: ["", [Validators.required]],
       password: ["", Validators.required],
+      permissionLevel: ["", Validators.required],
     });
   }
 
@@ -30,6 +44,9 @@ export class LoginComponent implements DoCheck {
   get password(): AbstractControl {
     return this.loginForm.controls["password"];
   }
+  get permissionLevel(): AbstractControl {
+    return this.loginForm.controls["permissionLevel"];
+  }
 
   ngDoCheck() {
     this.invalidUser = this.service.invalidUserError;
@@ -39,6 +56,7 @@ export class LoginComponent implements DoCheck {
     return {
       userName: this.userName.value,
       password: this.password.value,
+      permissionLevel: this.permissionLevel.value,
     };
   }
 
@@ -46,6 +64,18 @@ export class LoginComponent implements DoCheck {
     if (this.loginForm.valid) {
       let model = this.model();
       this.service.login(model.userName, model.password);
+    }
+  }
+
+  registerUser() {
+    if (this.loginForm.valid) {
+      let model = this.model();
+      this.service.registerUser(
+        model.userName,
+        model.password,
+        model.permissionLevel
+      );
+      this.snackbar.open("User Registered");
     }
   }
 }

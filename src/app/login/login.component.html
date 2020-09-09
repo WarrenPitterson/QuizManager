@@ -33,9 +33,31 @@
             Username or password is incorrect
           </mat-error>
         </p>
-        <button mat-raised-button (click)="submit()" color="primary">
-          Login
-        </button>
+        <div>
+          <mat-form-field>
+            <mat-select
+              placeholder="Permission Level"
+              formControlName="permissionLevel"
+            >
+              <mat-option *ngFor="let item of dropDown" [value]="item.value"
+                >{{ item.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <mat-error
+          *ngIf="permissionLevel.touched && permissionLevel.errors?.required"
+        >
+          Permission Level is required
+        </mat-error>
+        <div fxLayoutGap="50px">
+          <button mat-raised-button (click)="submit()" color="primary">
+            Login
+          </button>
+          <button mat-raised-button (click)="registerUser()" color="primary">
+            Add New User
+          </button>
+        </div>
       </form>
     </div>
   </mat-card>
