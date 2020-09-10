@@ -1,6 +1,6 @@
 <div class="container">
   <mat-card>
-    <mat-card-title>Login</mat-card-title>
+    <mat-card-title>{{ title }}</mat-card-title>
     <div>
       <form [formGroup]="loginForm">
         <p>
@@ -33,7 +33,7 @@
             Username or password is incorrect
           </mat-error>
         </p>
-        <div>
+        <div *ngIf="newUser">
           <mat-form-field>
             <mat-select
               placeholder="Permission Level"
@@ -44,17 +44,28 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <mat-error
+            *ngIf="permissionLevel.touched && permissionLevel.errors?.required"
+          >
+            Permission Level is required
+          </mat-error>
         </div>
-        <mat-error
-          *ngIf="permissionLevel.touched && permissionLevel.errors?.required"
-        >
-          Permission Level is required
-        </mat-error>
+
         <div fxLayoutGap="50px">
-          <button mat-raised-button (click)="submit()" color="primary">
+          <button
+            *ngIf="!newUser"
+            mat-raised-button
+            (click)="submit()"
+            color="primary"
+          >
             Login
           </button>
-          <button mat-raised-button (click)="registerUser()" color="primary">
+          <button
+            *ngIf="newUser"
+            mat-raised-button
+            (click)="registerUser()"
+            color="primary"
+          >
             Add New User
           </button>
         </div>
@@ -62,3 +73,5 @@
     </div>
   </mat-card>
 </div>
+
+<button mat-raise-button (click)="toggleMode()"></button>

@@ -1,4 +1,3 @@
-import { PermissionLevel } from "./../shared/permissionLevel";
 import { Component, DoCheck } from "@angular/core";
 import {
   FormGroup,
@@ -17,7 +16,8 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class LoginComponent implements DoCheck {
   loginForm: FormGroup;
   invalidUser: boolean;
-  //dropDown: PermissionLevel;
+  newUser: boolean = true;
+  title: string;
 
   dropDown: any[] = [
     { name: "Edit", value: 1 },
@@ -30,11 +30,18 @@ export class LoginComponent implements DoCheck {
     private service: LoginService,
     private snackbar: MatSnackBar
   ) {
-    this.loginForm = fb.group({
-      userName: ["", [Validators.required]],
-      password: ["", Validators.required],
-      permissionLevel: ["", Validators.required],
-    });
+    if (this.newUser) {
+      this.loginForm = fb.group({
+        userName: ["", [Validators.required]],
+        password: ["", Validators.required],
+        permissionLevel: [""],
+      });
+    } else {
+      this.loginForm = fb.group({
+        userName: ["", [Validators.required]],
+        password: ["", Validators.required],
+      });
+    }
   }
 
   get userName(): AbstractControl {
@@ -50,6 +57,7 @@ export class LoginComponent implements DoCheck {
 
   ngDoCheck() {
     this.invalidUser = this.service.invalidUserError;
+    this.title = this.newUser == true ? "Register" : "Log In";
   }
 
   private model() {
@@ -61,6 +69,7 @@ export class LoginComponent implements DoCheck {
   }
 
   submit() {
+    debugger;
     if (this.loginForm.valid) {
       let model = this.model();
       this.service.login(model.userName, model.password);
@@ -75,7 +84,11 @@ export class LoginComponent implements DoCheck {
         model.password,
         model.permissionLevel
       );
-      this.snackbar.open("User Registered");
+      this.snackbar.open("User Registered")._dismissAfter(1000);
     }
+  }
+
+  toggleMode() {
+    this.newUser = !this.newUser;
   }
 }

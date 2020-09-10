@@ -33,8 +33,6 @@ export class LoginService {
   }
 
   registerUser(userName: string, password: string, permission: number) {
-    debugger;
-
     return this.http
       .post<User>(this.endpoint + "register", {
         userName,
