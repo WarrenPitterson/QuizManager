@@ -2,8 +2,8 @@ import { PermissionLevel } from "./../shared/permissionLevel";
 import { EditQuestionComponent } from "../edit-question/edit-question.component";
 import { Questions } from "./../models/questions";
 import { QuizService } from "./quiz.service";
-import { Component, OnInit, OnChanges, DoCheck } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { LoginService } from "../login/login.service";
 
@@ -15,6 +15,15 @@ import { LoginService } from "../login/login.service";
 export class QuizDetailComponent implements OnInit {
   quizId: number;
   allQuestions: Questions[];
+  columnsToDisplay = [
+    "id",
+    "question",
+    "correct",
+    "incorrect1",
+    "incorrect2",
+    "incorrect3",
+    "actions",
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +34,13 @@ export class QuizDetailComponent implements OnInit {
     this.quizId = this.route.snapshot.params.id;
     this.service.quizId = this.quizId;
   }
+
+  // numberOfQuestions() {
+  //   this.allQuestions.forEach((element) => {
+  //     this.index = this.allQuestions.indexOf(element) + 1;
+  //     return this.index;
+  //   });
+  // }
 
   get editPermission() {
     return this.loginService.permission == PermissionLevel.edit;
@@ -38,9 +54,16 @@ export class QuizDetailComponent implements OnInit {
     this.loadQuestion();
   }
 
-  edit() {
+  edit(questionId: number) {
     this.dialog.open(EditQuestionComponent, {
       data: this.allQuestions[0].questionId,
+      width: "30vw",
+    });
+  }
+
+  delete(questionId: number) {
+    this.dialog.open(EditQuestionComponent, {
+      data: this.allQuestions[questionId],
       width: "30vw",
     });
   }

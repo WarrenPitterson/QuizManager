@@ -21,6 +21,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { MatDialogModule } from "@angular/material/dialog";
 import { EditQuestionComponent } from "./edit-question/edit-question.component";
 import { MatSelectModule } from "@angular/material/select";
+import { MatTableModule } from "@angular/material/table";
+import { MatIconModule } from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -45,6 +47,8 @@ import { MatSelectModule } from "@angular/material/select";
     FlexLayoutModule,
     MatDialogModule,
     MatSelectModule,
+    MatTableModule,
+    MatIconModule,
   ],
   providers: [LoginService, QuizService, HttpClientModule, MatSnackBar],
   entryComponents: [EditQuestionComponent],

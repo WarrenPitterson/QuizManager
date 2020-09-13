@@ -69,7 +69,6 @@ export class LoginComponent implements DoCheck {
   }
 
   submit() {
-    debugger;
     if (this.loginForm.valid) {
       let model = this.model();
       this.service.login(model.userName, model.password);
