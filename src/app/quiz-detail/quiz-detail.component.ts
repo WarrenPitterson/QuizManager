@@ -54,6 +54,10 @@ export class QuizDetailComponent implements OnInit {
     this.loadQuestion();
   }
 
+  addQuestion() {
+    console.log("add to implement");
+  }
+
   edit(questionId: number) {
     this.dialog.open(EditQuestionComponent, {
       data: this.allQuestions[0].questionId,
@@ -62,10 +66,7 @@ export class QuizDetailComponent implements OnInit {
   }
 
   delete(questionId: number) {
-    this.dialog.open(EditQuestionComponent, {
-      data: this.allQuestions[questionId],
-      width: "30vw",
-    });
+    this.service.deleteQuestion(questionId);
   }
 
   loadQuestion() {

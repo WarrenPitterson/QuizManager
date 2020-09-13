@@ -11,12 +11,13 @@
   font-weight: bold;
 }
 
-.table {
+table {
   width: 100%;
+  background-color: beige;
 }
 
 .mat-column-id {
-  width: 20px;
+  width: 25px;
 }
 .mat-column-question {
   width: 300px;
@@ -35,6 +36,7 @@
 }
 .mat-column-actions {
   width: 20px;
+  font-weight: bold;
 }
 .edit {
   padding-right: 20px;

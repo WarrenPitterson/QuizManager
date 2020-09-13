@@ -21,6 +21,14 @@ export class QuizService {
       });
   }
 
+  deleteQuestion(questionId: number) {
+    return this.http
+      .delete<Questions>(this.questionEndpoint + questionId)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
+
   getQuiz(id) {
     return this.http
       .get<Questions[]>(this.quizEndpoint + id)

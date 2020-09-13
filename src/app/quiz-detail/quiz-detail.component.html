@@ -1,40 +1,48 @@
-<table mat-table [dataSource]="allQuestions">
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>Id</th>
-    <td mat-cell *matCellDef="let quiz">1</td>
-  </ng-container>
-  <ng-container matColumnDef="question">
-    <th mat-header-cell *matHeaderCellDef>Question</th>
-    <td mat-cell *matCellDef="let quiz">{{ quiz.question }}</td>
-  </ng-container>
-  <ng-container matColumnDef="correct">
-    <th mat-header-cell *matHeaderCellDef>Correct</th>
-    <td mat-cell *matCellDef="let quiz">{{ quiz.correctAnswer }}</td>
-  </ng-container>
-  <ng-container matColumnDef="incorrect1">
-    <th mat-header-cell *matHeaderCellDef>Option 1</th>
-    <td mat-cell *matCellDef="let quiz">{{ quiz.incorrectAnswer1 }}</td>
-  </ng-container>
-  <ng-container matColumnDef="incorrect2">
-    <th mat-header-cell *matHeaderCellDef>Option 2</th>
-    <td mat-cell *matCellDef="let quiz">{{ quiz.incorrectAnswer2 }}</td>
-  </ng-container>
-  <ng-container matColumnDef="incorrect3">
-    <th mat-header-cell *matHeaderCellDef>Option 3</th>
-    <td mat-cell *matCellDef="let quiz">{{ quiz.incorrectAnswer3 }}</td>
-  </ng-container>
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let quiz">
-      <a class="edit" (click)="edit(quiz.questionId)">Edit</a>
-      <a (click)="delete(quiz.questionId)">Delete</a>
-    </td>
-  </ng-container>
+<div class="quiz-container" fxLayout="column" fxLayoutGap="50px">
+  <div>
+    <button mat-raised-button color="primary" (click)="addQuestion()">
+      Add
+    </button>
+  </div>
+  <div>
+    <table mat-table [dataSource]="allQuestions">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let quiz">1</td>
+      </ng-container>
+      <ng-container matColumnDef="question">
+        <th mat-header-cell *matHeaderCellDef>Question</th>
+        <td mat-cell *matCellDef="let quiz">{{ quiz.question }}</td>
+      </ng-container>
+      <ng-container matColumnDef="correct">
+        <th mat-header-cell *matHeaderCellDef>Correct</th>
+        <td mat-cell *matCellDef="let quiz">{{ quiz.correctAnswer }}</td>
+      </ng-container>
+      <ng-container matColumnDef="incorrect1">
+        <th mat-header-cell *matHeaderCellDef>Option 1</th>
+        <td mat-cell *matCellDef="let quiz">{{ quiz.incorrectAnswer1 }}</td>
+      </ng-container>
+      <ng-container matColumnDef="incorrect2">
+        <th mat-header-cell *matHeaderCellDef>Option 2</th>
+        <td mat-cell *matCellDef="let quiz">{{ quiz.incorrectAnswer2 }}</td>
+      </ng-container>
+      <ng-container matColumnDef="incorrect3">
+        <th mat-header-cell *matHeaderCellDef>Option 3</th>
+        <td mat-cell *matCellDef="let quiz">{{ quiz.incorrectAnswer3 }}</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let quiz">
+          <a class="edit" (click)="edit(quiz.questionId)">Edit</a>
+          <a (click)="delete(quiz.questionId)">Delete</a>
+        </td>
+      </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
-</table>
-
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+    </table>
+  </div>
+</div>
 <!-- <div class="quiz-container">
   <h2>Question</h2>
   <p>{{ this.allQuestions[0].question }}</p>
