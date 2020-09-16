@@ -24,9 +24,6 @@ export class QuizDetailComponent implements OnInit {
     "incorrect3",
     "actions",
   ];
-  indexArray: number[] = [1, 2, 3, 4];
-  model: number;
-  count = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -50,12 +47,6 @@ export class QuizDetailComponent implements OnInit {
   ngOnInit() {
     // this.service.getQuiz(this.quizId);
     // this.loadQuestion();
-  }
-
-  test() {
-    for (let i = 0, len = this.allQuestions.length; i < len; i++) {
-      // this.model = this.indexArray[i];
-    }
   }
 
   addQuestion() {

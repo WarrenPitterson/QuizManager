@@ -1,4 +1,5 @@
 export class Quizzes {
-  public id: number;
+  public quizId: number;
+  public name: string;
   public questions: number[];
 }

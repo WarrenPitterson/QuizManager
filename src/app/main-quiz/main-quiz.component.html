@@ -1,20 +1,47 @@
-<!-- <div class="container" fxLayout="row" fxLayoutGap="50px">
+<div class="container" fxLayout="row" fxLayoutGap="50px">
   <div>
-    <table mat-table [dataSource]="allQuizzes">
+    <div fxLayout="row" fxLayoutGap="50px" [formGroup]="dataForm">
+      <mat-form-field>
+        <input matInput placeholder="Quiz Name" formControlName="name" />
+      </mat-form-field>
+      <button mat-raised-button color="accent" (click)="add()">Add</button>
+    </div>
+
+    <table mat-table [dataSource]="allQuizs">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Id</th>
-        <td mat-cell *matCellDef="let quiz">{{ model }}</td>
+        <td mat-cell *matCellDef="let quiz; let i = index">{{ i + 1 }}</td>
       </ng-container>
-      <ng-container matColumnDef="question">
-        <th mat-header-cell *matHeaderCellDef>Question</th>
-        <td mat-cell *matCellDef="let quiz">{{ quiz.question }}</td>
+      <ng-container matColumnDef="quizId">
+        <th mat-header-cell *matHeaderCellDef>Quiz Id</th>
+        <td mat-cell *matCellDef="let quiz">
+          {{ quiz.quizId }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let quiz">
+          <a [routerLink]="['/quiz-detail', quiz.quizId]">{{ quiz.name }}</a>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let quiz">
-          <a class="edit" (click)="edit(quiz.questionId)">Edit</a>
-          <a (click)="delete(quiz.questionId)">Delete</a>
+          <!-- <button
+            mat-raised-button
+            color="primary"
+            (click)="edit(quiz.questionId)"
+          >
+            Edit
+          </button> -->
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="delete(quiz.quizId)"
+          >
+            Delete
+          </button>
         </td>
       </ng-container>
 
@@ -22,9 +49,9 @@
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
     </table>
   </div>
-</div> -->
+</div>
 
-<div>
+<!-- <div>
   <button mat-raised-button color="primary" [routerLink]="['/quiz-detail', 1]">
     Quiz 1
   </button>
@@ -37,4 +64,4 @@
   <button mat-raised-button color="accent" [routerLink]="['/quiz-detail', 4]">
     Quiz 4
   </button>
-</div>
+</div> -->

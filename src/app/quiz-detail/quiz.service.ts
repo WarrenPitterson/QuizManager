@@ -1,7 +1,7 @@
 import { Quizzes } from "./../models/quizzes";
 import { Questions } from "./../models/questions";
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { DebugEventListener, Injectable } from "@angular/core";
 @Injectable()
 export class QuizService {
   questionEndpoint: string = "http://localhost:54477/api/questions/";
@@ -41,9 +41,24 @@ export class QuizService {
   }
 
   getAllQuizs() {
-    debugger;
     return this.http.get<Quizzes[]>(this.quizsEndpoint).subscribe((data) => {
       this.quizsArray = data;
     });
+  }
+
+  deleteQuiz(quizId: number) {
+    return this.http
+      .delete<Quizzes>(this.quizsEndpoint + quizId)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
+
+  addQuiz(name: string) {
+    return this.http
+      .post<Quizzes>(this.quizsEndpoint, { name })
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }
