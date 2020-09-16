@@ -1,3 +1,4 @@
+import { Quizzes } from "./../models/quizzes";
 import { QuizService } from "./../quiz-detail/quiz.service";
 import { Component, OnInit } from "@angular/core";
 
@@ -7,7 +8,11 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./main-quiz.component.scss"],
 })
 export class MainQuizComponent implements OnInit {
-  constructor() {}
+  allQuizs: Quizzes[];
+
+  constructor(private service: QuizService) {
+    this.service.getAllQuizs();
+  }
 
   ngOnInit(): void {}
 }

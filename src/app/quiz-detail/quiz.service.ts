@@ -9,6 +9,9 @@ export class QuizService {
   quizId: number;
   quizArray: Questions[];
 
+  quizsEndpoint: string = "http://localhost:54477/api/quizs/";
+  quizsArray: Quizzes[];
+
   constructor(private http: HttpClient) {
     this.http = http;
   }
@@ -29,11 +32,18 @@ export class QuizService {
       });
   }
 
-  getQuiz(id) {
+  getQuestionsForQuiz(id: number) {
     return this.http
       .get<Questions[]>(this.quizEndpoint + id)
       .subscribe((data) => {
         this.quizArray = data;
       });
+  }
+
+  getAllQuizs() {
+    debugger;
+    return this.http.get<Quizzes[]>(this.quizsEndpoint).subscribe((data) => {
+      this.quizsArray = data;
+    });
   }
 }

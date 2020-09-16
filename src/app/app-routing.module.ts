@@ -17,6 +17,7 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginComponent,
+    data: { registerMode: false },
   },
   {
     path: "register",

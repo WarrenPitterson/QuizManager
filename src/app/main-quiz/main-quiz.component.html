@@ -1,4 +1,30 @@
-<div class="container" fxLayout="row" fxLayoutGap="50px">
+<!-- <div class="container" fxLayout="row" fxLayoutGap="50px">
+  <div>
+    <table mat-table [dataSource]="allQuizzes">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let quiz">{{ model }}</td>
+      </ng-container>
+      <ng-container matColumnDef="question">
+        <th mat-header-cell *matHeaderCellDef>Question</th>
+        <td mat-cell *matCellDef="let quiz">{{ quiz.question }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let quiz">
+          <a class="edit" (click)="edit(quiz.questionId)">Edit</a>
+          <a (click)="delete(quiz.questionId)">Delete</a>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+    </table>
+  </div>
+</div> -->
+
+<div>
   <button mat-raised-button color="primary" [routerLink]="['/quiz-detail', 1]">
     Quiz 1
   </button>
