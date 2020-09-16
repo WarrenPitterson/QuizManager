@@ -1,3 +1,4 @@
+import { element } from "protractor";
 import { Component, DoCheck } from "@angular/core";
 import {
   FormGroup,
@@ -7,6 +8,7 @@ import {
 } from "@angular/forms";
 import { LoginService } from "./login.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "login",
@@ -16,7 +18,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 export class LoginComponent implements DoCheck {
   loginForm: FormGroup;
   invalidUser: boolean;
-  newUser: boolean = true;
+  registerMode: any;
   title: string;
 
   dropDown: any[] = [
@@ -28,13 +30,17 @@ export class LoginComponent implements DoCheck {
   constructor(
     private fb: FormBuilder,
     private service: LoginService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
-    if (this.newUser) {
+    this.registerMode = this.route.snapshot.data["registerMode"];
+
+    if (this.registerMode) {
       this.loginForm = fb.group({
         userName: ["", [Validators.required]],
         password: ["", Validators.required],
-        permissionLevel: [""],
+        permissionLevel: ["", Validators.required],
       });
     } else {
       this.loginForm = fb.group({
@@ -51,20 +57,21 @@ export class LoginComponent implements DoCheck {
   get password(): AbstractControl {
     return this.loginForm.controls["password"];
   }
+
   get permissionLevel(): AbstractControl {
     return this.loginForm.controls["permissionLevel"];
   }
 
   ngDoCheck() {
     this.invalidUser = this.service.invalidUserError;
-    this.title = this.newUser == true ? "Register" : "Log In";
+    this.title = this.registerMode == true ? "Register" : "Log In";
   }
 
   private model() {
     return {
       userName: this.userName.value,
       password: this.password.value,
-      permissionLevel: this.permissionLevel.value,
+      permissionLevel: this.registerMode ? this.permissionLevel.value : null,
     };
   }
 
@@ -84,10 +91,11 @@ export class LoginComponent implements DoCheck {
         model.permissionLevel
       );
       this.snackbar.open("User Registered")._dismissAfter(1000);
+      this.router.navigate(["/login"]);
     }
   }
 
   toggleMode() {
-    this.newUser = !this.newUser;
+    this.registerMode = !this.registerMode;
   }
 }

@@ -8,7 +8,7 @@
     <table mat-table [dataSource]="allQuestions">
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef>Id</th>
-        <td mat-cell *matCellDef="let quiz">1</td>
+        <td mat-cell *matCellDef="let quiz">{{ model }}</td>
       </ng-container>
       <ng-container matColumnDef="question">
         <th mat-header-cell *matHeaderCellDef>Question</th>
@@ -39,37 +39,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
     </table>
   </div>
 </div>
-<!-- <div class="quiz-container">
-  <h2>Question</h2>
-  <p>{{ this.allQuestions[0].question }}</p>
-  <div *ngIf="editPermission || restrictedPermission">
-    <label class="title">Option 1</label>
-    <p>
-      {{ this.allQuestions[0].correctAnswer }}
-    </p>
-    <label class="title">Option 2</label>
-    <p>
-      {{ this.allQuestions[0].incorrectAnswer1 }}
-    </p>
-    <label class="title">Option 3</label>
-    <p>
-      {{ this.allQuestions[0].incorrectAnswer2 }}
-    </p>
-    <label class="title">Option 4</label>
-    <p>
-      {{ this.allQuestions[0].incorrectAnswer3 }}
-    </p>
-    <button
-      *ngIf="editPermission"
-      mat-raised-button
-      (click)="edit()"
-      color="primary"
-    >
-      Edit
-    </button>
-  </div>
-</div> -->

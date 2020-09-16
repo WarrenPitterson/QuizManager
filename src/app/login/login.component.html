@@ -33,7 +33,7 @@
             Username or password is incorrect
           </mat-error>
         </p>
-        <div *ngIf="newUser">
+        <div *ngIf="registerMode">
           <mat-form-field>
             <mat-select
               placeholder="Permission Level"
@@ -53,7 +53,7 @@
 
         <div fxLayoutGap="50px">
           <button
-            *ngIf="!newUser"
+            *ngIf="!registerMode"
             mat-raised-button
             (click)="submit()"
             color="primary"
@@ -61,13 +61,14 @@
             Login
           </button>
           <button
-            *ngIf="newUser"
+            *ngIf="registerMode"
             mat-raised-button
             (click)="registerUser()"
             color="primary"
           >
             Add New User
           </button>
+          <a *ngIf="!registerMode" [routerLink]="['/register']">New User?</a>
         </div>
       </form>
     </div>

@@ -24,6 +24,9 @@ export class QuizDetailComponent implements OnInit {
     "incorrect3",
     "actions",
   ];
+  indexArray: number[] = [1, 2, 3, 4];
+  model: number;
+  count = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,13 +38,6 @@ export class QuizDetailComponent implements OnInit {
     this.service.quizId = this.quizId;
   }
 
-  // numberOfQuestions() {
-  //   this.allQuestions.forEach((element) => {
-  //     this.index = this.allQuestions.indexOf(element) + 1;
-  //     return this.index;
-  //   });
-  // }
-
   get editPermission() {
     return this.loginService.permission == PermissionLevel.edit;
   }
@@ -52,10 +48,19 @@ export class QuizDetailComponent implements OnInit {
   ngOnInit() {
     this.service.getQuiz(this.quizId);
     this.loadQuestion();
+    setTimeout(() => {
+      this.test();
+    }, 200);
+  }
+
+  test() {
+    for (let i = 0, len = this.allQuestions.length; i < len; i++) {
+      this.model = this.indexArray[i];
+    }
   }
 
   addQuestion() {
-    console.log("add to implement");
+    console.log("add to be implemented");
   }
 
   edit(questionId: number) {
