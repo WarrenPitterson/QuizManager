@@ -14,8 +14,10 @@ import { QuizService } from "../quiz-detail/quiz.service";
   styleUrls: ["./edit-question.component.scss"],
 })
 export class EditQuestionComponent implements OnInit {
-  editForm: FormGroup;
+  dataForm: FormGroup;
   questionId: number;
+  editMode: boolean;
+  title: string;
 
   constructor(
     private fb: FormBuilder,
@@ -23,7 +25,7 @@ export class EditQuestionComponent implements OnInit {
     private dialog: MatDialogRef<EditQuestionComponent>,
     @Inject(MAT_DIALOG_DATA) data
   ) {
-    this.editForm = fb.group({
+    this.dataForm = fb.group({
       question: ["", Validators.required],
       correctAnswer: ["", Validators.required],
       incorrectAnswer1: ["", Validators.required],
@@ -31,22 +33,24 @@ export class EditQuestionComponent implements OnInit {
       incorrectAnswer3: ["", Validators.required],
     });
     this.questionId = data;
+    this.editMode = data ? true : false;
+    this.title = this.editMode ? "Edit" : "Create";
   }
 
   get question(): AbstractControl {
-    return this.editForm.controls["question"];
+    return this.dataForm.controls["question"];
   }
   get correctAnswer(): AbstractControl {
-    return this.editForm.controls["correctAnswer"];
+    return this.dataForm.controls["correctAnswer"];
   }
   get incorrectAnswer1(): AbstractControl {
-    return this.editForm.controls["incorrectAnswer1"];
+    return this.dataForm.controls["incorrectAnswer1"];
   }
   get incorrectAnswer2(): AbstractControl {
-    return this.editForm.controls["incorrectAnswer2"];
+    return this.dataForm.controls["incorrectAnswer2"];
   }
   get incorrectAnswer3(): AbstractControl {
-    return this.editForm.controls["incorrectAnswer3"];
+    return this.dataForm.controls["incorrectAnswer3"];
   }
 
   ngOnInit() {}
@@ -64,9 +68,13 @@ export class EditQuestionComponent implements OnInit {
   }
 
   save() {
-    if (this.editForm.valid) {
-      let model = this.model();
-      this.service.editQuestion(model, this.questionId);
+    if (this.dataForm.valid) {
+      const model = this.model();
+      if (this.editMode) {
+        this.service.editQuestion(model, this.questionId);
+      } else {
+        this.service.addQuestion(model);
+      }
       this.dialog.close();
     }
   }

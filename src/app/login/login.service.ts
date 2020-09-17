@@ -8,7 +8,6 @@ import { Router } from "@angular/router";
 export class LoginService {
   endpoint: string = "http://localhost:54477/api/user/";
   permission: number;
-  invalidUserError: boolean;
 
   constructor(private http: HttpClient, private route: Router) {
     this.http = http;
@@ -24,11 +23,8 @@ export class LoginService {
         (data) => {
           this.permission = data.permission;
           this.route.navigate(["/main-quiz"]);
-          this.invalidUserError = false;
         },
-        () => {
-          this.invalidUserError = true;
-        }
+        () => {}
       );
   }
 
@@ -42,8 +38,6 @@ export class LoginService {
       .subscribe(
         (data) => {
           console.log(data);
-          // Add redirect to welcome or login
-          // this.route.navigate(["/main-quiz"]);
         },
         () => {}
       );

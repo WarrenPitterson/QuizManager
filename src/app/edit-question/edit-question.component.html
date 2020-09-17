@@ -1,6 +1,6 @@
-<h2 mat-dialog-title>Edit Q&A</h2>
+<h2 mat-dialog-title>{{ title }} Q&A</h2>
 
-<mat-dialog-content [formGroup]="editForm" class="inputs">
+<mat-dialog-content [formGroup]="dataForm" class="inputs">
   <div>
     <mat-form-field>
       <input matInput placeholder="Question" formControlName="question" />
@@ -69,6 +69,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
   <button class="mat-raised-button" (click)="close()">Close</button>
+  <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
 </mat-dialog-actions>

@@ -33,8 +33,6 @@ export class QuizDetailComponent implements OnInit {
   ) {
     this.quizId = this.route.snapshot.params.id;
     this.service.quizId = this.quizId;
-    this.service.getQuestionsForQuiz(this.quizId);
-    this.loadQuestion();
   }
 
   get editPermission() {
@@ -45,12 +43,14 @@ export class QuizDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.service.getQuiz(this.quizId);
-    // this.loadQuestion();
+    this.service.getQuestionsForQuiz(this.quizId);
+    this.loadQuestion();
   }
 
   addQuestion() {
-    console.log("add to be implemented");
+    this.dialog.open(EditQuestionComponent, {
+      width: "30vw",
+    });
   }
 
   edit(questionId: number) {
@@ -67,6 +67,6 @@ export class QuizDetailComponent implements OnInit {
   loadQuestion() {
     setTimeout(() => {
       this.allQuestions = this.service.quizArray;
-    }, 100);
+    }, 350);
   }
 }

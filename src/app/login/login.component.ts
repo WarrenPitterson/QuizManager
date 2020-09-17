@@ -1,5 +1,5 @@
 import { element } from "protractor";
-import { Component, DoCheck } from "@angular/core";
+import { Component, DoCheck, OnInit } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from "@angular/router";
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.scss"],
 })
-export class LoginComponent implements DoCheck {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   invalidUser: boolean;
   registerMode: any;
@@ -35,19 +35,7 @@ export class LoginComponent implements DoCheck {
     private router: Router
   ) {
     this.registerMode = this.route.snapshot.data["registerMode"];
-
-    if (this.registerMode) {
-      this.loginForm = fb.group({
-        userName: ["", [Validators.required]],
-        password: ["", Validators.required],
-        permissionLevel: ["", Validators.required],
-      });
-    } else {
-      this.loginForm = fb.group({
-        userName: ["", [Validators.required]],
-        password: ["", Validators.required],
-      });
-    }
+    this.initialiseForm();
   }
 
   get userName(): AbstractControl {
@@ -62,9 +50,23 @@ export class LoginComponent implements DoCheck {
     return this.loginForm.controls["permissionLevel"];
   }
 
-  ngDoCheck() {
-    this.invalidUser = this.service.invalidUserError;
+  ngOnInit() {
     this.title = this.registerMode == true ? "Register" : "Log In";
+  }
+
+  initialiseForm() {
+    if (this.registerMode) {
+      this.loginForm = this.fb.group({
+        userName: ["", [Validators.required]],
+        password: ["", Validators.required],
+        permissionLevel: ["", Validators.required],
+      });
+    } else {
+      this.loginForm = this.fb.group({
+        userName: ["", [Validators.required]],
+        password: ["", Validators.required],
+      });
+    }
   }
 
   private model() {
@@ -93,9 +95,5 @@ export class LoginComponent implements DoCheck {
       this.snackbar.open("User Registered")._dismissAfter(1000);
       this.router.navigate(["/login"]);
     }
-  }
-
-  toggleMode() {
-    this.registerMode = !this.registerMode;
   }
 }

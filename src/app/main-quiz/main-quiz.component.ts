@@ -47,6 +47,6 @@ export class MainQuizComponent {
   loadData() {
     setTimeout(() => {
       this.allQuizs = this.service.quizsArray;
-    }, 200);
+    }, 350);
   }
 }

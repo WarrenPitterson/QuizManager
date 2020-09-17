@@ -1,7 +1,7 @@
 import { Quizzes } from "./../models/quizzes";
 import { Questions } from "./../models/questions";
 import { HttpClient } from "@angular/common/http";
-import { DebugEventListener, Injectable } from "@angular/core";
+import { Injectable } from "@angular/core";
 @Injectable()
 export class QuizService {
   questionEndpoint: string = "http://localhost:54477/api/questions/";
@@ -57,6 +57,14 @@ export class QuizService {
   addQuiz(name: string) {
     return this.http
       .post<Quizzes>(this.quizsEndpoint, { name })
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
+
+  addQuestion(questions: Questions) {
+    return this.http
+      .post<Questions>(this.questionEndpoint, questions)
       .subscribe((data) => {
         console.log(data);
       });

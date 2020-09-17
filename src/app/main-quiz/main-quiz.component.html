@@ -4,7 +4,7 @@
       <mat-form-field>
         <input matInput placeholder="Quiz Name" formControlName="name" />
       </mat-form-field>
-      <button mat-raised-button color="accent" (click)="add()">Add</button>
+      <button mat-raised-button color="primary" (click)="add()">Add</button>
     </div>
 
     <table mat-table [dataSource]="allQuizs">
@@ -50,18 +50,3 @@
     </table>
   </div>
 </div>
-
-<!-- <div>
-  <button mat-raised-button color="primary" [routerLink]="['/quiz-detail', 1]">
-    Quiz 1
-  </button>
-  <button mat-raised-button color="accent" [routerLink]="['/quiz-detail', 2]">
-    Quiz 2
-  </button>
-  <button mat-raised-button color="primary" [routerLink]="['/quiz-detail', 3]">
-    Quiz 3
-  </button>
-  <button mat-raised-button color="accent" [routerLink]="['/quiz-detail', 4]">
-    Quiz 4
-  </button>
-</div> -->
