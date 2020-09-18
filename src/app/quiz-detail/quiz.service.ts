@@ -16,9 +16,9 @@ export class QuizService {
     this.http = http;
   }
 
-  editQuestion(model, questionId: number) {
+  editQuestion(model: Questions) {
     return this.http
-      .put<Questions>(this.questionEndpoint + questionId, model)
+      .put<Questions>(this.questionEndpoint + model.questionId, model)
       .subscribe((data) => {
         console.log(data);
       });

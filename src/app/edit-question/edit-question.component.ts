@@ -62,7 +62,7 @@ export class EditQuestionComponent implements OnInit {
       incorrectAnswer1: this.incorrectAnswer1.value,
       incorrectAnswer2: this.incorrectAnswer2.value,
       incorrectAnswer3: this.incorrectAnswer3.value,
-      questionId: this.questionId,
+      questionId: this.questionId ?? 0,
       quizId: this.service.quizId,
     };
   }
@@ -71,7 +71,7 @@ export class EditQuestionComponent implements OnInit {
     if (this.dataForm.valid) {
       const model = this.model();
       if (this.editMode) {
-        this.service.editQuestion(model, this.questionId);
+        this.service.editQuestion(model);
       } else {
         this.service.addQuestion(model);
       }
