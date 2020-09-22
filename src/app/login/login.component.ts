@@ -9,6 +9,7 @@ import {
 import { LoginService } from "./login.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Component({
   selector: "login",
@@ -38,8 +39,8 @@ export class LoginComponent implements OnInit {
     this.initialiseForm();
   }
 
-  get userName(): AbstractControl {
-    return this.loginForm.controls["userName"];
+  get username(): AbstractControl {
+    return this.loginForm.controls["username"];
   }
 
   get password(): AbstractControl {
@@ -57,13 +58,13 @@ export class LoginComponent implements OnInit {
   initialiseForm() {
     if (this.registerMode) {
       this.loginForm = this.fb.group({
-        userName: ["", [Validators.required]],
+        username: ["", [Validators.required]],
         password: ["", Validators.required],
         permissionLevel: ["", Validators.required],
       });
     } else {
       this.loginForm = this.fb.group({
-        userName: ["", [Validators.required]],
+        username: ["", [Validators.required]],
         password: ["", Validators.required],
       });
     }
@@ -71,7 +72,7 @@ export class LoginComponent implements OnInit {
 
   private model() {
     return {
-      userName: this.userName.value,
+      username: this.username.value,
       password: this.password.value,
       permissionLevel: this.registerMode ? this.permissionLevel.value : null,
     };
@@ -80,7 +81,7 @@ export class LoginComponent implements OnInit {
   submit() {
     if (this.loginForm.valid) {
       let model = this.model();
-      this.service.login(model.userName, model.password);
+      this.service.login(model.username, model.password);
     }
   }
 
@@ -88,7 +89,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       let model = this.model();
       this.service.registerUser(
-        model.userName,
+        model.username,
         model.password,
         model.permissionLevel
       );

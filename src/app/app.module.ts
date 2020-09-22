@@ -23,6 +23,11 @@ import { EditQuestionComponent } from "./edit-question/edit-question.component";
 import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
 import { MatIconModule } from "@angular/material/icon";
+// import { JwtHelperService, JwtModule } from "@auth0/angular-jwt";
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -49,6 +54,13 @@ import { MatIconModule } from "@angular/material/icon";
     MatSelectModule,
     MatTableModule,
     MatIconModule,
+    // JwtModule.forRoot({
+    //   config: {
+    //     tokenGetter: tokenGetter,
+    //     // allowedDomains: ["example.com"],
+    //     // disallowedRoutes: ["http://example.com/examplebadroute/"],
+    //   },
+    // }),
   ],
   providers: [LoginService, QuizService, HttpClientModule, MatSnackBar],
   entryComponents: [EditQuestionComponent],

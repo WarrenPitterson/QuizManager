@@ -6,12 +6,12 @@
         <p>
           <mat-form-field>
             <input
-              formControlName="userName"
+              formControlName="username"
               matInput
               type="text"
               placeholder="Username"
             />
-            <mat-error *ngIf="userName.touched && userName.errors?.required">
+            <mat-error *ngIf="username.touched && username.errors?.required">
               Username Required
             </mat-error>
           </mat-form-field>
@@ -57,6 +57,7 @@
             mat-raised-button
             (click)="submit()"
             color="primary"
+            [disabled]="!loginForm.valid"
           >
             Login
           </button>

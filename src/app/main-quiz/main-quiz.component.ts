@@ -1,3 +1,4 @@
+import { LoginService } from "./../login/login.service";
 import { Quizzes } from "./../models/quizzes";
 import { QuizService } from "./../quiz-detail/quiz.service";
 import { Component, OnInit } from "@angular/core";
@@ -11,10 +12,15 @@ import { AbstractControl, FormBuilder, FormGroup } from "@angular/forms";
 export class MainQuizComponent {
   allQuizs: Quizzes[];
   dataForm: FormGroup;
+  username: string;
 
   columnsToDisplay = ["id", "name", "actions"];
 
-  constructor(private service: QuizService, private fb: FormBuilder) {
+  constructor(
+    private service: QuizService,
+    private fb: FormBuilder,
+    private loginService: LoginService
+  ) {
     this.service.getAllQuizs();
     this.loadData();
     this.dataForm = fb.group({

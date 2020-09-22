@@ -28,19 +28,18 @@ export class QuizDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: QuizService,
-    private loginService: LoginService,
     private dialog: MatDialog
   ) {
     this.quizId = this.route.snapshot.params.id;
     this.service.quizId = this.quizId;
   }
 
-  get editPermission() {
-    return this.loginService.permission == PermissionLevel.edit;
-  }
-  get restrictedPermission() {
-    return this.loginService.permission == PermissionLevel.restricted;
-  }
+  // get editPermission() {
+  //   return this.loginService.permission == PermissionLevel.edit;
+  // }
+  // get restrictedPermission() {
+  //   return this.loginService.permission == PermissionLevel.restricted;
+  // }
 
   ngOnInit() {
     this.service.getQuestionsForQuiz(this.quizId);

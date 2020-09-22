@@ -1,11 +1,12 @@
 <div class="header-container">
   <div>
-    <h2>Quiz Manager WebbiSkools</h2>
+    <div>
+      <a class="back" [routerLink]="['../']">Back</a>
+      <h2>Quiz Manager WebbiSkools</h2>
+    </div>
   </div>
   <img src="../../assets/logo.jpg" alt="" />
   <div class="logout" *ngIf="loggedIn">
-    <button mat-raised-button color="primary" [routerLink]="['/login']">
-      Logout
-    </button>
+    <button mat-raised-button color="primary" (click)="logout()">Logout</button>
   </div>
 </div>

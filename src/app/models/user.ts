@@ -1,6 +1,8 @@
+import { PermissionLevel } from "./../shared/permissionLevel";
 export class User {
   id: number;
-  userName: string;
+  username: string;
   password: string;
   permission: number;
+  tokenString: string;
 }

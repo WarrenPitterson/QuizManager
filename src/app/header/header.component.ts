@@ -1,5 +1,6 @@
 import { LoginService } from "./../login/login.service";
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "header",
@@ -7,11 +8,16 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./header.component.scss"],
 })
 export class HeaderComponent implements OnInit {
-  constructor(private service: LoginService) {}
+  constructor(private route: Router, private loginService: LoginService) {}
 
   get loggedIn(): boolean {
-    return this.service.permission != null ? true : false;
+    return !this.loginService.userTokenExpired();
   }
 
   ngOnInit(): void {}
+
+  logout() {
+    localStorage.removeItem("token");
+    this.route.navigate(["/login"]);
+  }
 }
