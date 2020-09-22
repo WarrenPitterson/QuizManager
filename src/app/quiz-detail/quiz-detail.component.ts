@@ -18,6 +18,7 @@ export class QuizDetailComponent implements OnInit {
   quizName: string;
   columnsToDisplay: string[];
   permission: string;
+  letters: string[] = ["A", "B", "C", "D", "E", "F"];
 
   constructor(
     private route: ActivatedRoute,
