@@ -15,35 +15,63 @@ import { LoginService } from "../login/login.service";
 export class QuizDetailComponent implements OnInit {
   quizId: number;
   allQuestions: Questions[];
-  columnsToDisplay = [
-    "id",
-    "question",
-    "correct",
-    "incorrect1",
-    "incorrect2",
-    "incorrect3",
-    "actions",
-  ];
+  quizName: string;
+  columnsToDisplay: string[];
+  permission: string;
 
   constructor(
     private route: ActivatedRoute,
     private service: QuizService,
+    private loginService: LoginService,
     private dialog: MatDialog
   ) {
     this.quizId = this.route.snapshot.params.id;
     this.service.quizId = this.quizId;
   }
 
-  // get editPermission() {
-  //   return this.loginService.permission == PermissionLevel.edit;
-  // }
-  // get restrictedPermission() {
-  //   return this.loginService.permission == PermissionLevel.restricted;
-  // }
-
   ngOnInit() {
+    this.quizId = this.route.snapshot.params.id;
+    this.service.quizId = this.quizId;
+    this.quizName = this.route.snapshot.params.name;
+
     this.service.getQuestionsForQuiz(this.quizId);
     this.loadQuestion();
+
+    this.loginService.decodeToken();
+    this.permission = this.loginService.decodedToken.role;
+    this.setColumns();
+  }
+
+  get editPermission() {
+    return this.permission === "Edit" ? true : false;
+  }
+  get viewPermission() {
+    return this.permission === "View" ? true : false;
+  }
+
+  setColumns() {
+    if (this.editPermission) {
+      this.columnsToDisplay = [
+        "id",
+        "question",
+        "correct",
+        "incorrect1",
+        "incorrect2",
+        "incorrect3",
+        "actions",
+      ];
+    } else if (this.viewPermission) {
+      this.columnsToDisplay = [
+        "id",
+        "question",
+        "correct",
+        "incorrect1",
+        "incorrect2",
+        "incorrect3",
+      ];
+    } else {
+      this.columnsToDisplay = ["id", "question"];
+    }
   }
 
   addQuestion() {

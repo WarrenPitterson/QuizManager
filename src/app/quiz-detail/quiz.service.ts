@@ -19,9 +19,7 @@ export class QuizService {
   editQuestion(model: Questions) {
     return this.http
       .put<Questions>(this.questionEndpoint + model.questionId, model)
-      .subscribe((data) => {
-        console.log(data);
-      });
+      .subscribe((data) => {});
   }
 
   deleteQuestion(questionId: number) {

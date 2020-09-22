@@ -1,6 +1,11 @@
 <div class="container" fxLayout="row" fxLayoutGap="50px">
   <div>
-    <div fxLayout="row" fxLayoutGap="50px" [formGroup]="dataForm">
+    <div
+      *ngIf="editPermission"
+      fxLayout="row"
+      fxLayoutGap="50px"
+      [formGroup]="dataForm"
+    >
       <mat-form-field>
         <input matInput placeholder="Quiz Name" formControlName="name" />
       </mat-form-field>
@@ -21,7 +26,10 @@
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let quiz">
-          <a [routerLink]="['/quiz-detail', quiz.quizId]">{{ quiz.name }}</a>
+          <a
+            [routerLink]="['/quiz-detail', quiz.quizId, { name: quiz.name }]"
+            >{{ quiz.name }}</a
+          >
         </td>
       </ng-container>
 

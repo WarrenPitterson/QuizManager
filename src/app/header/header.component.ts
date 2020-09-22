@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   constructor(private route: Router, private loginService: LoginService) {}
 
   get loggedIn(): boolean {
-    return !this.loginService.userTokenExpired();
+    return !this.loginService.isUserTokenExpired();
   }
 
   ngOnInit(): void {}

@@ -7,11 +7,13 @@ import { Router } from "@angular/router";
 @Injectable()
 export class LoginService {
   endpoint: string = "http://localhost:54477/api/user/";
-  decodedToken: any;
   helper: JwtHelperService = new JwtHelperService();
+  token: string;
+  decodedToken: any;
 
   constructor(private http: HttpClient, private route: Router) {
     this.http = http;
+    this.token = localStorage.getItem("token");
   }
 
   login(username: string, password: string) {
@@ -47,11 +49,13 @@ export class LoginService {
       );
   }
 
-  userTokenExpired() {
+  isUserTokenExpired() {
+    const token = localStorage.getItem("token");
+    return this.helper.isTokenExpired(token);
+  }
+
+  decodeToken() {
     const token = localStorage.getItem("token");
     this.decodedToken = this.helper.decodeToken(token);
-    console.log(this.decodedToken.role);
-    console.log(this.decodedToken);
-    return this.helper.isTokenExpired(token);
   }
 }
