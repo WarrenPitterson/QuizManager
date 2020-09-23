@@ -9,7 +9,7 @@ export class QuizService {
   quizId: number;
   quizArray: Questions[];
 
-  quizsEndpoint: string = "http://localhost:54477/api/quizs/";
+  mainQuizPageEndpoints: string = "http://localhost:54477/api/quizs/";
   quizsArray: Quizzes[];
 
   constructor(private http: HttpClient) {
@@ -39,14 +39,16 @@ export class QuizService {
   }
 
   getAllQuizs() {
-    return this.http.get<Quizzes[]>(this.quizsEndpoint).subscribe((data) => {
-      this.quizsArray = data;
-    });
+    return this.http
+      .get<Quizzes[]>(this.mainQuizPageEndpoints)
+      .subscribe((data) => {
+        this.quizsArray = data;
+      });
   }
 
   deleteQuiz(quizId: number) {
     return this.http
-      .delete<Quizzes>(this.quizsEndpoint + quizId)
+      .delete<Quizzes>(this.mainQuizPageEndpoints + quizId)
       .subscribe((data) => {
         console.log(data);
       });
@@ -54,7 +56,7 @@ export class QuizService {
 
   addQuiz(name: string) {
     return this.http
-      .post<Quizzes>(this.quizsEndpoint, { name })
+      .post<Quizzes>(this.mainQuizPageEndpoints, { name })
       .subscribe((data) => {
         console.log(data);
       });

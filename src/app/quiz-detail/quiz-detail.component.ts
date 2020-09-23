@@ -82,8 +82,9 @@ export class QuizDetailComponent implements OnInit {
   }
 
   edit(questionId: number) {
+    debugger;
     this.dialog.open(EditQuestionComponent, {
-      data: this.allQuestions[0].questionId,
+      data: questionId,
       width: "30vw",
     });
   }

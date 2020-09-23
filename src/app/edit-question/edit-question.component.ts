@@ -34,7 +34,6 @@ export class EditQuestionComponent implements OnInit {
     });
     this.questionId = data;
     this.editMode = data ? true : false;
-    this.title = this.editMode ? "Edit" : "Create";
   }
 
   get question(): AbstractControl {
@@ -53,7 +52,9 @@ export class EditQuestionComponent implements OnInit {
     return this.dataForm.controls["incorrectAnswer3"];
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.title = this.editMode ? "Edit" : "Create";
+  }
 
   private model() {
     return {
