@@ -1,3 +1,4 @@
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { LoginService } from "./../login/login.service";
 import { Quizzes } from "./../models/quizzes";
 import { QuizService } from "./../quiz-detail/quiz.service";
@@ -25,7 +26,8 @@ export class MainQuizComponent implements OnInit {
   constructor(
     private service: QuizService,
     private fb: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private snackbar: MatSnackBar
   ) {
     this.service.getAllQuizs();
     this.loadData();
@@ -50,11 +52,17 @@ export class MainQuizComponent implements OnInit {
 
   delete(quizId: number) {
     this.service.deleteQuiz(quizId);
+    this.snackbar.open("Quiz Deleted, Please Refresh")._dismissAfter(1000);
   }
 
   add() {
     if (this.dataForm.valid) {
       this.service.addQuiz(this.model().name);
+      this.snackbar.open("Quiz Added, Please Refresh")._dismissAfter(1000);
+    } else {
+      this.snackbar
+        .open("Please name the Quiz, if you wish to Add")
+        ._dismissAfter(1000);
     }
   }
 

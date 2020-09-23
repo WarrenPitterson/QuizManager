@@ -1,3 +1,4 @@
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { PermissionLevel } from "./../shared/permissionLevel";
 import { EditQuestionComponent } from "../edit-question/edit-question.component";
 import { Questions } from "./../models/questions";
@@ -24,7 +25,8 @@ export class QuizDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private service: QuizService,
     private loginService: LoginService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackbar: MatSnackBar
   ) {
     this.quizId = this.route.snapshot.params.id;
     this.service.quizId = this.quizId;
@@ -90,6 +92,7 @@ export class QuizDetailComponent implements OnInit {
 
   delete(questionId: number) {
     this.service.deleteQuestion(questionId);
+    this.snackbar.open("Question Deleted, Please Refresh")._dismissAfter(1000);
   }
 
   loadQuestion() {

@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
   invalidUser: boolean;
   registerMode: any;
   title: string;
+  // badRequest: boolean;
 
   dropDown: any[] = [
     { name: "Edit", value: 1 },
@@ -53,6 +54,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.title = this.registerMode == true ? "Register" : "Log In";
+  }
+
+  get badRequest(): boolean {
+    return this.service.badRequest ? true : false;
   }
 
   initialiseForm() {

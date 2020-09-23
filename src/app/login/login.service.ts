@@ -10,6 +10,7 @@ export class LoginService {
   helper: JwtHelperService = new JwtHelperService();
   token: string;
   decodedToken: any;
+  badRequest: boolean;
 
   constructor(private http: HttpClient, private route: Router) {
     this.http = http;
@@ -30,7 +31,9 @@ export class LoginService {
             this.route.navigate(["/main-quiz"]);
           }, 200);
         },
-        () => {}
+        () => {
+          this.badRequest = true;
+        }
       );
   }
 
