@@ -18,7 +18,7 @@ export class QuizDetailComponent implements OnInit {
   quizName: string;
   columnsToDisplay: string[];
   permission: string;
-  letters: string[] = ["A", "B", "C", "D", "E", "F"];
+  lettersPrefix: string[] = ["A", "B", "C", "D", "E", "F"];
 
   constructor(
     private route: ActivatedRoute,
@@ -82,7 +82,6 @@ export class QuizDetailComponent implements OnInit {
   }
 
   edit(questionId: number) {
-    debugger;
     this.dialog.open(EditQuestionComponent, {
       data: questionId,
       width: "30vw",

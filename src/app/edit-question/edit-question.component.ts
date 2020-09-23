@@ -54,6 +54,7 @@ export class EditQuestionComponent implements OnInit {
 
   ngOnInit() {
     this.title = this.editMode ? "Edit" : "Create";
+    this.dialog.disableClose = true;
   }
 
   private model() {
