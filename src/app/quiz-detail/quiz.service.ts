@@ -6,10 +6,11 @@ import { Injectable } from "@angular/core";
 export class QuizService {
   questionEndpoint: string = "http://localhost:54477/api/questions/";
   quizEndpoint: string = "http://localhost:54477/api/questions/quiz/";
+  mainQuizPageEndpoints: string = "http://localhost:54477/api/quizs/";
+
   quizId: number;
   quizArray: Questions[];
 
-  mainQuizPageEndpoints: string = "http://localhost:54477/api/quizs/";
   quizsArray: Quizzes[];
 
   constructor(private http: HttpClient) {
@@ -25,9 +26,7 @@ export class QuizService {
   deleteQuestion(questionId: number) {
     return this.http
       .delete<Questions>(this.questionEndpoint + questionId)
-      .subscribe((data) => {
-        console.log(data);
-      });
+      .subscribe((data) => {});
   }
 
   getQuestionsForQuiz(id: number) {
@@ -49,24 +48,18 @@ export class QuizService {
   deleteQuiz(quizId: number) {
     return this.http
       .delete<Quizzes>(this.mainQuizPageEndpoints + quizId)
-      .subscribe((data) => {
-        console.log(data);
-      });
+      .subscribe((data) => {});
   }
 
   addQuiz(name: string) {
     return this.http
       .post<Quizzes>(this.mainQuizPageEndpoints, { name })
-      .subscribe((data) => {
-        console.log(data);
-      });
+      .subscribe((data) => {});
   }
 
   addQuestion(questions: Questions) {
     return this.http
       .post<Questions>(this.questionEndpoint, questions)
-      .subscribe((data) => {
-        console.log(data);
-      });
+      .subscribe((data) => {});
   }
 }

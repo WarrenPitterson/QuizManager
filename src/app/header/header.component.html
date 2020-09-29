@@ -1,7 +1,9 @@
 <div class="header-container">
   <div>
     <div>
-      <a class="back" [routerLink]="['/main-quiz']">Main Quiz</a>
+      <a class="back" *ngIf="loggedIn" [routerLink]="['/main-quiz']"
+        >Main Quiz</a
+      >
       <h2>Quiz Manager WebbiSkools</h2>
     </div>
   </div>

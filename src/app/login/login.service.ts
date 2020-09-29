@@ -45,9 +45,7 @@ export class LoginService {
         permission,
       })
       .subscribe(
-        (data) => {
-          console.log(data);
-        },
+        (data) => {},
         () => {}
       );
   }
